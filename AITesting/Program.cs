@@ -8,16 +8,17 @@
             bb.Set<int>("Speed", 10);
 
             var child = bb.Create("Child");
-            if (child.IsSuccess)
-            {
-                Blackboard? cbb = child.Value;
-                cbb.Set<float>("Score", 100.0f);
+            var x = bb.Create("Child");
+            x.Process(
+            //child.Process(
+            (x) => {
+                x.Set<float>("Score", 100.0f);
 
-                var speed = cbb.Get<int>("Speed");
-                var score = cbb.Get<float>("Score");
+                var speed = x.Get<int>("Speed");
+                var score = x.Get<float>("Score");
 
-                Console.WriteLine($"{speed} {score}");
-            }
+                Console.WriteLine($"{speed} {bb.GetType("Speed")} {score} {x.GetType("Score")} ");
+            });
 
         }
     }
